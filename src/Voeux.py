@@ -4,4 +4,3 @@ class Voeux:
         self.typeBien = typeBien
         self.prixSouhaite = prixSouhaite
         self.localisation = localisation
-        
