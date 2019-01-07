@@ -7,10 +7,13 @@ class BienImmobilier :
         TERRAIN =3
 
 
-    def __init__(self, prix,dateVente,adresse,orientation,dateDispo):
+    def __init__(self, prix,dateVente,adresse,orientation,dateDispo,id):
         self.prix = prix
         self.dateVente = dateVente
         self.adresse = adresse
         self.orientation = orientation
         self.dateDispo = dateDispo
+        self.id = id
+
+    def inscrire(self):
 
