@@ -1,6 +1,11 @@
 from enum import Enum
 class BienImmobilier :
-    TypesBien = Enum("Maison","Terrain","Appartement")
+
+    class TypesBien(Enum):
+        MAISON =1
+        APPARTEMENT =2
+        TERRAIN =3
+
 
     def __init__(self, prix,dateVente,adresse,orientation,dateDispo):
         self.prix = prix
@@ -8,6 +13,4 @@ class BienImmobilier :
         self.adresse = adresse
         self.orientation = orientation
         self.dateDispo = dateDispo
-
-
 
