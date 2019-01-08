@@ -1,4 +1,4 @@
-from src import Personne
+from src.Personne import Personne
 
 class Physique(Personne):
 
@@ -8,3 +8,6 @@ class Physique(Personne):
         self.addresse = addresse
         self.numTel = numTel
         self.email = email
+
+    def __str__(self):
+        return (f"nom : {self.nom}")
