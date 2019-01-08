@@ -15,5 +15,5 @@ class BienImmobilier :
         self.dateDispo = dateDispo
         self.id = id
 
-    def inscrire(self):
-
+    def inscrire (self,agence):
+        agence.biensImmobiliers.append(self)
