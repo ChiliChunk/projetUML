@@ -1,6 +1,6 @@
-from src import BienImmobilier as B
+from src import BienImmobilier
 
-class Maison(B.BienImmobilier):
+class Maison(BienImmobilier):
     def __init__(self,prix,dateVente,adresse,orientation,dateDispo, surface, nbPiece,nbEtage,moyenChauffage, id):
         super().__init__(self,prix,dateVente,adresse,orientation,dateDispo,id)
         self.surface = surface

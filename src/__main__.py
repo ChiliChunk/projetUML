@@ -6,4 +6,3 @@ agence = Agence()
 personne.inscrire(agence)
 print(personne)
 print(agence)
-
