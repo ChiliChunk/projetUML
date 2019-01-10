@@ -8,10 +8,6 @@ class Agence:
         self.personnes = []
         self.nom = nom
 
-    def __str__(self):
-        return (f"rdvs : {''.join(str(e) for e in self.rdvs)} biens : {''.join(str(e) for e in self.biensImmobiliers)} annonces : {''.join(str(e) for e in self.annonces)} personnes : {''.join(str(e) for e in self.personnes)} NOM : {self.nom}")
-    
-
     def prendreRdvMandat(self, bien,date):
         self.rdvs.append(Rdv(bien=bien,vendeur=bien.vendeur, type=TypesRdv.MANDAT,date=date))
 
@@ -43,3 +39,6 @@ class Agence:
                     if voeux.surfaceAuSol == bien.surface:
                         return True
         return False
+    
+    def __str__(self):
+        return (f"rdvs : {''.join(str(e) for e in self.rdvs)} biens : {''.join(str(e) for e in self.biensImmobiliers)} annonces : {''.join(str(e) for e in self.annonces)} personnes : {''.join(str(e) for e in self.personnes)} NOM : {self.nom}")
