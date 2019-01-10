@@ -1,39 +1,48 @@
 from tkinter import *
 from tkinter import ttk
+from src.Agence import Agence
+from tkinter import messagebox
 
-
-def calculate(*args):
-    try:
-        value = float(feet.get())
-        meters.set((0.3048 * value * 10000.0 + 0.5) / 10000.0)
-    except ValueError:
-        pass
-
+def addpersonne():
+    messagebox.showinfo(message='Have a good day')
 
 root = Tk()
-root.title("Feet to Meters")
 
-mainframe = ttk.Frame(root, padding="3 3 12 12")
-mainframe.grid(column=0, row=0, sticky=(N, W, E, S))
-root.columnconfigure(0, weight=1)
-root.rowconfigure(0, weight=1)
+agence = Agence()
 
-feet = StringVar()
-meters = StringVar()
+nom = ()
 
-feet_entry = ttk.Entry(mainframe, width=7, textvariable=feet)
-feet_entry.grid(column=2, row=1, sticky=(W, E))
+for personne in agence.personnes :
+    nom.__add__(personne.nom)
 
-ttk.Label(mainframe, textvariable=meters).grid(column=2, row=2, sticky=(W, E))
-ttk.Button(mainframe, text="Calculate", command=calculate).grid(column=3, row=3, sticky=W)
+cnames = StringVar(value=nom)
 
-ttk.Label(mainframe, text="feet").grid(column=3, row=1, sticky=W)
-ttk.Label(mainframe, text="is equivalent to").grid(column=1, row=2, sticky=E)
-ttk.Label(mainframe, text="meters").grid(column=3, row=2, sticky=W)
+c = ttk.Frame(root, padding=(5, 5, 12, 0))
+c.grid(column=0, row=0, sticky=(N,W,E,S))
+root.grid_columnconfigure(0, weight=1)
+root.grid_rowconfigure(0,weight=1)
 
-for child in mainframe.winfo_children(): child.grid_configure(padx=5, pady=5)
+lbox = Listbox(c, listvariable=cnames, height=9)
 
-feet_entry.focus()
-root.bind('<Return>', calculate)
+addp = ttk.Button(c, text='Ajout d\'une personne', command=addpersonne, default='active')
+
+addb = ttk.Button(c, text="Ajout d\'un bien")
+
+addd = ttk.Button(c, text="Ajout d'une demande")
+
+lbox.grid(column=0, row=0, rowspan=6, sticky=(N,S,E,W))
+
+addp.grid(column=1, row=1, sticky=(W,E))
+
+addd.grid(column=1, row=2, sticky=(W,E))
+
+addb.grid(column=1, row=3, sticky=(W,E))
+
+c.grid_columnconfigure(0, weight=1)
+c.grid_rowconfigure(5, weight=1)
+
+for i in range(0,len(agence.personnes),2):
+    lbox.itemconfigure(i, background='#f0f0ff')
+
 
 root.mainloop()
