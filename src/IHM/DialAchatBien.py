@@ -35,6 +35,8 @@ def renderFields(typeSelected):
         entryNbPice.grid(row=4, column=1)
         entrySurface.grid(row=5, column=1)
 
+    submit = Button(master , text = "Enregistrer").grid(row="6")
+
 
 def changeHandler(event):
     renderFields(event)
@@ -47,7 +49,8 @@ def renderDropdownMenu(master):
 
 def renderDialAchatBien():
 
-    Label(master, text="Entrer un voeux d'achat").grid(row=0)
+    Label(master, text="Entrer un voeux d'achat").grid(row=0 , sticky=(E,W))
+    master.title("Ajout d'un voeux")
     renderDropdownMenu(master)
     mainloop( )
 
