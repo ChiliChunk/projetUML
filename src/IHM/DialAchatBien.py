@@ -2,8 +2,15 @@ from tkinter import *
 
 master = Tk()
 
+def update():
+    for widget in master.winfo_children():
+        if widget.grid_info().get('row') >= 4:
+            widget.destroy()
 
 def renderFields(typeSelected):
+
+    update()
+
     Label(master, text="Prix souhaité").grid(row=2)
     entryPrix = Entry(master)
     entryPrix.grid(row=2, column=1)
