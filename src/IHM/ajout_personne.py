@@ -6,7 +6,7 @@ import re
 def enregistrer():
     if not re.match("[^@]+@[^@]+\.[^@]+",email.get()):
         Label(root, fg="red", text="Email Invalide").grid(column=0, row=12, sticky=(W, E))
-    elif not re.match("[1-9 ]{10,15}",tel.get()):
+    elif not re.match("[0-9 ]{10,15}",tel.get()):
         Label(root, fg="red", text="Telephone Invalide").grid(column=0, row=12, sticky=(W, E))
     else:
         print("ca marche")
