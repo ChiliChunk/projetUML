@@ -21,12 +21,10 @@ class listeFrame(Frame):
 
         self.c = ttk.Frame(frame, padding=(5, 5, 12, 0))
         self.c.grid(column=0, row=0, sticky=(N, W, E, S))
-        root.grid_columnconfigure(0, weight=1)
-        root.grid_rowconfigure(0, weight=1)
 
         self.lbox = self.tabpersonne()
 
-        addp = ttk.Button(self.c, text='Ajout d\'une personne', command=self.addpersonne , default='active')
+        addp = ttk.Button(self.c, text='Ajout d\'une personne', command=(lambda: self.addpersonne(parent)))
 
         addb = ttk.Button(self.c, text="Ajout d\'un bien")
 
@@ -53,7 +51,7 @@ class listeFrame(Frame):
             self.lbox.destroy()
         self.lbox = self.tabpersonne()
 
-    def addpersonne(self):
+    def addpersonne(self,parent):
         p1 = Personne("Paul Itess", "8 rue de la chevre", "0548789523", "xXdarksasukeXx09@live.fr")
         p1.inscrire(self.agence)
         nom = []
