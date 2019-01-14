@@ -2,40 +2,33 @@ from tkinter import *
 from src.Physique import Physique
 import re
 
-#Besoin de mettre l'agence dans  vérifier le format du num et de l'adresse mail
-def enregistrer():
-    if not re.match("[^@]+@[^@]+\.[^@]+",email.get()):
-        Label(root, fg="red", text="Email Invalide").grid(column=0, row=12, sticky=(W, E))
-    elif not re.match("[0-9 ]{10,15}",tel.get()):
-        Label(root, fg="red", text="Telephone Invalide").grid(column=0, row=12, sticky=(W, E))
-    else:
-        print("ca marche")
-        Label(root, fg="red", text="OK").grid(column=0, row=12, sticky=(W, E))
-        user =Physique(nom.get(),adresse.get(),tel.get,email.get())
-        user.inscrire()
+class AjoutPers(Frame):
 
+    def enregistrer(self, agence):
+        if not re.fullmatch("[^@]+@[^@]+\.[^@]+",self.email.get()):
+            Label(self.root, fg="red", text="Email Invalide").grid(column=0, row=12, sticky=(W, E))
+        elif not re.fullmatch("[0-9]{10,15}",self.tel.get()):
+            Label(self.root, fg="red", text="Telephone Invalide").grid(column=0, row=12, sticky=(W, E))
+        else:
+            user =Physique(self.nom.get(),self.adresse.get(),self.tel.get,self.email.get())
+            user.inscrire(self.agence)
 
+    def __init__(self, parent,agence):
+        self.root = Frame.__init__(self,parent)
+        parent.title("Ajout d'une personne physique")
 
-root = Tk()
-root.title("Ajout d'une personne physique")
-
-root.columnconfigure(0, weight=1)
-root.rowconfigure(0, weight=1)
-
-nom=StringVar()
-adresse=StringVar()
-email=StringVar()
-tel=StringVar()
-
-Label(root, text="Nom").grid(column=0, row=0 , sticky=(W, E))
-Entry(root, textvariable=nom).grid(column=0, row=1, sticky=(W, E))
-Label(root, text="Adresse").grid(column=0, row=3, sticky=(W, E))
-Entry(root, textvariable=adresse).grid(column=0, row=4, sticky=(W, E))
-Label(root, text="Mail").grid(column=0, row=6, sticky=(W, E))
-Entry(root, textvariable=email).grid(column=0, row=7, sticky=(W, E))
-Label(root, text="Telephone").grid(column=0, row=9, sticky=(W, E))
-Entry(root, textvariable=tel).grid(column=0, row=10, sticky=(W, E))
-warning = Label(root, fg="red",text="").grid(column=0, row=12, sticky=(W, E))
-submit = Button(root, text="Enregistrer", command=enregistrer).grid(column=0, row=13, sticky=(W, E))
-root.mainloop()
-
+        self.agence = agence
+        self.nom=StringVar()
+        self.adresse=StringVar()
+        self.email=StringVar()
+        self.tel=StringVar()
+        Label(self.root, text="Nom").grid(column=0, row=0 , sticky=(W, E))
+        Entry(self.root, textvariable=self.nom).grid(column=0, row=1, sticky=(W, E))
+        Label(self.root, text="Adresse").grid(column=0, row=3, sticky=(W, E))
+        Entry(self.root, textvariable=self.adresse).grid(column=0, row=4, sticky=(W, E))
+        Label(self.root, text="Mail").grid(column=0, row=6, sticky=(W, E))
+        Entry(self.root, textvariable=self.email).grid(column=0, row=7, sticky=(W, E))
+        Label(self.root, text="Telephone").grid(column=0, row=9, sticky=(W, E))
+        Entry(self.root, textvariable=self.tel).grid(column=0, row=10, sticky=(W, E))
+        Label(self.root, fg="red",text="").grid(column=0, row=12, sticky=(W, E))
+        Button(self.root, text="Enregistrer", command=self.enregistrer).grid(column=0, row=13, sticky=(W, E))
