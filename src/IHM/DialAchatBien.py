@@ -1,57 +1,98 @@
 from tkinter import *
+from src.Physique import Physique
+from src.Voeux import Voeux
+from src.BienImmobilier import BienImmobilier
+import re
 
-master = Tk()
+class DialAchatBien:
 
-def update():
-    for widget in master.winfo_children():
-        if widget.grid_info().get('row') >= 4:
-            widget.destroy()
+    def __init__(self , personne):
+        self.master = Tk()
+        self.localisation = StringVar()
+        self.nbPiece = StringVar()
+        self.prix = StringVar()
+        self.surface = StringVar()
+        self.typeSelected = ''
+        self.personne = personne
 
-def renderFields(typeSelected):
+    def update(self):
+        for widget in self.master.winfo_children():
+            if widget.grid_info().get('row') >= 4:
+                widget.destroy()
 
-    update()
+    def renderFields(self):
 
-    Label(master, text="Prix souhaité").grid(row=2)
-    entryPrix = Entry(master)
-    entryPrix.grid(row=2, column=1)
-    Label(master, text="Localisation").grid(row=3)
-    entryLocalisation = Entry(master)
-    entryLocalisation.grid(row=3, column=1)
-    if typeSelected == "Appartement":
-        labNbPiece = Label(master, text="Nombre de piece").grid(row=4)
-        entryNbPice = Entry(master)
-        entryNbPice.grid(row=4, column=1)
+        self.update()
 
-    if typeSelected == "Terrain":
-        labSurface = Label(master, text="Surface (m²)").grid(row=4)
-        entrySurface = Entry(master)
-        entrySurface.grid(row=4, column=1)
+        Label(self.master, text="Prix souhaité").grid(row=2)
+        entryPrix = Entry(self.master , textvariable=self.prix)
+        entryPrix.grid(row=2, column=1)
+        Label(self.master, text="Localisation").grid(row=3)
+        entryLocalisation = Entry(self.master , textvariable=self.localisation)
+        entryLocalisation.grid(row=3, column=1)
+        if typeSelected == "Appartement":
+            labNbPiece = Label(self.master, text="Nombre de piece").grid(row=4)
+            entryNbPice = Entry(self.master , textvariable=self.nbPiece)
+            entryNbPice.grid(row=4, column=1)
 
-    if typeSelected == "Maison":
-        labNbPiece =  Label(master, text="Nombre de piece").grid(row=4)
-        entrySurface = Label(master, text="Surface (m²)").grid(row=5)
-        entryNbPice = Entry(master)
-        entrySurface = Entry(master)
-        entryNbPice.grid(row=4, column=1)
-        entrySurface.grid(row=5, column=1)
+        if typeSelected == "Terrain":
+            labSurface = Label(self.master, text="Surface (m²)").grid(row=4)
+            entrySurface = Entry(self.master , textvariable=self.surface)
+            entrySurface.grid(row=4, column=1)
 
-    submit = Button(master , text = "Enregistrer").grid(row="6")
+        if typeSelected == "Maison":
+            labNbPiece =  Label(self.master, text="Nombre de piece").grid(row=4)
+            entrySurface = Label(self.master, text="Surface (m²)").grid(row=5)
+            entryNbPice = Entry(self.master , textvariable=self.nbPiece)
+            entrySurface = Entry(self.master , textvariable=self.surface)
+            entryNbPice.grid(row=4, column=1)
+            entrySurface.grid(row=5, column=1)
+
+        submit = Button(self.master , text = "Enregistrer" ,command=self.submitHandler).grid(row="6")
+
+    def submitHandler(self):
+        print('TEST')
+        if typeSelected == 'Appartement':
+            if re.fullmatch('[0-9]*' , self.prix.get()) and re.fullmatch('[0-9]*' , self.nbPiece.get()):
+                voeux = Voeux (BienImmobilier.TypesBien.APPARTEMENT,int(self.prix.get()),self.localisation,int(self.nbPiece.get()))
+                Label(self.master ,  text="Voeux ajouté").grid(row='7')
+                self.personne.ajoutVoeux(voeux)
+
+            else:
+                Label(self.master, text="Le prix et le nombre de pieces doivent etre des nombres").grid(row='7')
+        elif typeSelected == 'Maison':
+            voeux = Voeux (BienImmobilier.TypesBien.MAISON,int(self.prix.get()),self.localisation.get(),int(self.nbPiece.get()) , int(self.surface.get()))
+            self.personne.ajoutVoeux(voeux)
+
+        elif typeSelected == 'Terrain':
+            voeux = Voeux (BienImmobilier.TypesBien.TERRAIN,int(self.prix.get()),self.localisation.get(),int(self.surface.get()))
+            self.personne.ajoutVoeux(voeux)
+
+        print(self.localisation.get())
+        print(self.nbPiece.get())
+        print(self.prix.get())
+        print(self.selfsurface.get())
 
 
-def changeHandler(event):
-    renderFields(event)
+    def changeHandler(self,event):
+        global typeSelected
+        typeSelected = event
+        self.renderFields()
 
-def renderDropdownMenu(master):
-    variable = StringVar(master)
-    variable.set("Appartement")  # default value
-    OptionMenu(master, variable, "Appartement", "Terrain", "Maison", command=changeHandler).grid(row=1, column="1")
+    def renderDropdownMenu(self):
+        variable = StringVar (self.master)
+        variable.set("Appartement")  # default value
+        OptionMenu(self.master, variable, "Appartement", "Terrain", "Maison", command=self.changeHandler).grid(row=1, column="1")
 
 
-def renderDialAchatBien():
+    def render(self):
 
-    Label(master, text="Entrer un voeux d'achat").grid(row=0 , sticky=(E,W))
-    master.title("Ajout d'un voeux")
-    renderDropdownMenu(master)
-    mainloop( )
+        Label(self.master, text="Entrer un voeux d'achat").grid(row=0 , sticky=(E,W))
+        self.master.title("Ajout d'un voeux")
+        self.renderDropdownMenu()
+        mainloop( )
 
-renderDialAchatBien()
+
+phys = Physique('test','add' , 'numTel' , 'email')
+frame = DialAchatBien(phys)
+frame.render()
