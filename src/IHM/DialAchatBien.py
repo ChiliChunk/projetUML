@@ -7,18 +7,22 @@ import re
 class DialAchatBien:
 
     def __init__(self , personne):
-        self.master = Tk()
+        frame = Tk()
+        self.master = frame
         self.localisation = StringVar()
         self.nbPiece = StringVar()
         self.prix = StringVar()
         self.surface = StringVar()
         self.typeSelected = ''
         self.personne = personne
+        self.errorLabel = Label(frame , text=None)
+        print(self.errorLabel)
 
     def update(self):
         for widget in self.master.winfo_children():
-            if widget.grid_info().get('row') >= 4:
-                widget.destroy()
+            if widget.grid_info().get('row') != None:
+                if widget.grid_info().get('row') >= 4:
+                    widget.destroy()
 
     def renderFields(self):
 
@@ -51,15 +55,14 @@ class DialAchatBien:
         submit = Button(self.master , text = "Enregistrer" ,command=self.submitHandler).grid(row="6")
 
     def submitHandler(self):
-        print('TEST')
+        self.errorLabel['test'] = 'TEST'
+        self.errorLabel.grid(row="7")
         if typeSelected == 'Appartement':
             if re.fullmatch('[0-9]*' , self.prix.get()) and re.fullmatch('[0-9]*' , self.nbPiece.get()):
                 voeux = Voeux (BienImmobilier.TypesBien.APPARTEMENT,int(self.prix.get()),self.localisation,int(self.nbPiece.get()))
-                Label(self.master ,  text="Voeux ajouté").grid(row='7')
                 self.personne.ajoutVoeux(voeux)
-
             else:
-                Label(self.master, text="Le prix et le nombre de pieces doivent etre des nombres").grid(row='7')
+                ...
         elif typeSelected == 'Maison':
             voeux = Voeux (BienImmobilier.TypesBien.MAISON,int(self.prix.get()),self.localisation.get(),int(self.nbPiece.get()) , int(self.surface.get()))
             self.personne.ajoutVoeux(voeux)
@@ -71,7 +74,7 @@ class DialAchatBien:
         print(self.localisation.get())
         print(self.nbPiece.get())
         print(self.prix.get())
-        print(self.selfsurface.get())
+        print(self.surface.get())
 
 
     def changeHandler(self,event):
@@ -81,7 +84,7 @@ class DialAchatBien:
 
     def renderDropdownMenu(self):
         variable = StringVar (self.master)
-        variable.set("Appartement")  # default value
+        variable.set("Choose")  # default value
         OptionMenu(self.master, variable, "Appartement", "Terrain", "Maison", command=self.changeHandler).grid(row=1, column="1")
 
 
