@@ -1,4 +1,5 @@
 from enum import Enum
+from src.PromesseDeVente import PromesseDeVente
 class Rdv:
     def __init__(self,bien, type,date,acheteur=None,vendeur=None):
         self.acheteur =acheteur
@@ -6,6 +7,10 @@ class Rdv:
         self.bien = bien
         self.type = type
         self.date = date
+
+    def genererPromesseVente(self, adresseNotaire,):
+        if self.type == TypesRdv.VENTE:
+            return PromesseDeVente()
 
 class TypesRdv(Enum):
     VENTE = 1
