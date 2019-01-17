@@ -1,4 +1,4 @@
-from src import BienImmobilier
+from src.BienImmobilier import BienImmobilier
 
 class Maison(BienImmobilier):
     def __init__(self,prix,dateVente,adresse,orientation,dateDispo, surface, nbPiece,nbEtage,moyenChauffage, id):
@@ -7,3 +7,5 @@ class Maison(BienImmobilier):
         self.nbPiece = nbPiece
         self.nbEtage = nbEtage
         self.moyenChauffage = moyenChauffage
+        self.type = BienImmobilier.TypesBien.MAISON
+
