@@ -10,10 +10,12 @@ class Agence:
 
     def prendreRdvMandat(self, bien,date):
         self.rdvs.append(Rdv(bien=bien,vendeur=bien.vendeur, type=TypesRdv.MANDAT,date=date))
+        #return Mandat(Personne=bien.vendeur, BienImmobilier=bien)
 
     def prendreRdvVente(self, bien, date, acheteur):
         ...
-        #self.rdvs.append(Rdv(bien=bien,vendeur=bien.vendeur, type=TypesRdv.VENTE,date=date))
+        #self.rdvs.append(Rdv(bien=bien,vendeur=bien.vendeur,acheteur=acheteur, type=TypesRdv.VENTE,date=date))
+        #return PromesseDeVente()
 
     def prendreRdvVisite(self, bien,date, visiteur):
         ...
