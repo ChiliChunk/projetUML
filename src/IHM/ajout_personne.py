@@ -7,6 +7,7 @@ class AjoutPers(Frame):
     def enregistrer(self, agence):
         if not re.fullmatch("[^@]+@[^@]+\.[^@]+",self.email.get()):
             Label(self.root, fg="red", text="Email Invalide").grid(column=0, row=12, sticky=(W, E))
+
         elif not re.fullmatch("[0-9]{10,15}",self.tel.get()):
             Label(self.root, fg="red", text="Telephone Invalide").grid(column=0, row=12, sticky=(W, E))
         else:
@@ -32,3 +33,6 @@ class AjoutPers(Frame):
         Entry(self.root, textvariable=self.tel).grid(column=0, row=10, sticky=(W, E))
         Label(self.root, fg="red",text="").grid(column=0, row=12, sticky=(W, E))
         Button(self.root, text="Enregistrer", command=self.enregistrer).grid(column=0, row=13, sticky=(W, E))
+
+
+

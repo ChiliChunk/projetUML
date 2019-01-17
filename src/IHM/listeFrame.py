@@ -1,13 +1,14 @@
 from tkinter import *
 from tkinter import ttk
 from src.Agence import Agence
+from src.IHM.ajout_personne import AjoutPers
 from tkinter import messagebox
 from src.Personne import Personne
 
 class listeFrame(Frame):
 
     def __init__(self, parent):
-        frame = Frame.__init__(self,parent)
+        self.frame = Frame.__init__(self,parent)
         parent.title("Agence")
 
         self.agence = Agence()
@@ -19,7 +20,7 @@ class listeFrame(Frame):
 
         self.cnames = StringVar(value=nom)
 
-        self.c = ttk.Frame(frame, padding=(5, 5, 12, 0))
+        self.c = ttk.Frame(self.frame, padding=(5, 5, 12, 0))
         self.c.grid(column=0, row=0, sticky=(N, W, E, S))
 
         self.lbox = self.tabpersonne()
@@ -52,14 +53,10 @@ class listeFrame(Frame):
         self.lbox = self.tabpersonne()
 
     def addpersonne(self,parent):
-        p1 = Personne("Paul Itess", "8 rue de la chevre", "0548789523", "xXdarksasukeXx09@live.fr")
-        p1.inscrire(self.agence)
-        nom = []
-        for personne in self.agence.personnes:
-            nom += [personne.nom]
-        self.cnames = StringVar(value=nom)
-        print(nom)
-        self.refresh()
+        if self.frame is not None:
+            self.frame.destroy()
+
+        AjoutPers(parent,self.agence)
 
 root = Tk()
 

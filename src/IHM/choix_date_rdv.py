@@ -1,26 +1,20 @@
 from tkinter import *
-from src.Physique import Physique
-import re
-import datetime
-import time
-root = Tk()
-root.title("Choix date")
+from src.Date import Date
+class choixRDV(Frame):
+
+    def enregistrer(self,jour,heure):
+        return Date(jour, heure)
+
+    def __init__(self, parent):
+        self.root = Frame.__init__(self, parent)
+        parent.title("Ajout d'une personne physique")
+        jour = StringVar(value='jj/mm/aaaa')
+        heure = StringVar(value='12h00')
+        Label(self.root, text="Jour").grid()
+        Entry(self.root, textvariable=jour).grid()
+        Label(self.root, text="Heure").grid()
+        Entry(self.root,textvariable=heure).grid()
+        Button(self.root, text="Enregistrer", command=(lambda:self.enregistrer(jour,heure))).grid()
 
 
 
-root.columnconfigure(0, weight=1)
-root.rowconfigure(0, weight=1)
-
-date = StringVar(value='jj/mm/aaaa')
-heure = StringVar(value='00hmm')
-
-Label(root, text="Jour").grid()
-
-Combobox(root, textvariable=date).grid()
-Label(root, text="Heure").grid()
-Entry(root,textvariable=heure).grid()
-
-
-
-
-root.mainloop()
