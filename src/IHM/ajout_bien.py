@@ -1,10 +1,9 @@
 from tkinter import *
 from src.Physique import Physique
-from src.Voeux import BienImmobilier
 from src.BienImmobilier import BienImmobilier
 import re
 
-class DialAchatBien:
+class ajout_bien:
 
     def __init__(self , personne):
         frame = Tk()
@@ -13,6 +12,7 @@ class DialAchatBien:
         self.nbPiece = StringVar()
         self.prix = StringVar()
         self.surface = StringVar()
+        self.date = StringVar()
         self.typeSelected = ''
         self.personne = personne
         self.errorLabel = Label(frame , text=None)
@@ -34,6 +34,9 @@ class DialAchatBien:
         Label(self.master, text="Localisation").grid(row=3)
         entryLocalisation = Entry(self.master , textvariable=self.localisation)
         entryLocalisation.grid(row=3, column=1)
+        Label(self.master, text="Date dispo").grid(row=2)
+        entryDate = Entry(self.master , textvariable=self.date)
+        entryLocalisation.grid(row=4, column=1)
         if typeSelected == "Appartement":
             labNbPiece = Label(self.master, text="Nombre de piece").grid(row=4)
             entryNbPice = Entry(self.master , textvariable=self.nbPiece)
@@ -59,17 +62,14 @@ class DialAchatBien:
         self.errorLabel.grid(row="7")
         if typeSelected == 'Appartement':
             if re.fullmatch('[0-9]*' , self.prix.get()) and re.fullmatch('[0-9]*' , self.nbPiece.get()):
-                voeux = BienImmobilier (BienImmobilier.TypesBien.APPARTEMENT, int(self.prix.get()), self.localisation, int(self.nbPiece.get()))
-                self.personne.ajoutVoeux(voeux)
+                bien = BienImmobilier(BienImmobilier.TypesBien.APPARTEMENT, int(self.prix.get()), self.localisation, int(self.nbPiece.get()), self.date, self.personne)
             else:
                 ...
         elif typeSelected == 'Maison':
-            voeux = BienImmobilier (BienImmobilier.TypesBien.MAISON, int(self.prix.get()), self.localisation.get(), int(self.nbPiece.get()), int(self.surface.get()))
-            self.personne.ajoutVoeux(voeux)
+            bien = BienImmobilier (BienImmobilier.TypesBien.MAISON, int(self.prix.get()), self.localisation.get(), int(self.nbPiece.get()), int(self.surface.get()),self.date, self.personne)
 
         elif typeSelected == 'Terrain':
-            voeux = BienImmobilier (BienImmobilier.TypesBien.TERRAIN, int(self.prix.get()), self.localisation.get(), int(self.surface.get()))
-            self.personne.ajoutVoeux(voeux)
+            bien = BienImmobilier (BienImmobilier.TypesBien.TERRAIN, int(self.prix.get()), self.localisation.get(), int(self.surface.get()),self.date, self.personne)
 
         print(self.localisation.get())
         print(self.nbPiece.get())
@@ -97,5 +97,5 @@ class DialAchatBien:
 
 
 phys = Physique('test','add' , 'numTel' , 'email')
-frame = DialAchatBien(phys)
+frame = ajout_bien(phys)
 frame.render()

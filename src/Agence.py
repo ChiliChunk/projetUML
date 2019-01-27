@@ -27,6 +27,14 @@ class Agence:
             if self._voeuxEqualsBiens(voeux,bien):
                 result.append(bien)
 
+    def checkBien(self, bien):
+        res = []
+        for personne in self.personnes:
+            for voeu in personne.voeux:
+                if self._voeuxEqualsBiens(voeu,bien):
+                    res += [voeu]
+        return res
+
     @classmethod
     def _voeuxEqualsBiens(cls , voeux, bien):
         if voeux.typeBien == bien.type: #si le voeux et le bien sont du meme type
