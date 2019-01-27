@@ -1,12 +1,13 @@
-from src.Physique import Physique
-from src.Voeux import Voeux
-from src.BienImmobilier import BienImmobilier
-from src.controller.CtrlDialAchatBien import *
+from src.Physique import Physique # pour le main de test
+from src.Agence import Agence # pour le main de test
+from src.Maison import Maison # pour le main de test
+
+from src.controller.CtrlDialAchatBien import CtrlDialAchatBien
+
 class DialAchatBien:
     def __init__(self , personne , agence):
+        self.ctrl = CtrlDialAchatBien(personne , agence)
         self.askType()
-        self.personne = personne
-        self.agence = agence
 
 
     def askType(self):
@@ -16,7 +17,7 @@ class DialAchatBien:
                          '1 : Appartement\n'
                          '2 : Maison\n'
                          '3 : Terrain\n')
-            valid = validateType(type)
+            valid = self.ctrl.validateType(type)
             
         self.type = int(type)
         self.askStaticData()
@@ -28,30 +29,43 @@ class DialAchatBien:
         localisation = None
         while not valid:
             prix = input('Veuillez entrer un prix max souhaité en €: ')
-            valid = validateNumber(prix)
-        self.prix = prix
+            valid = self.ctrl.validateNumber(prix)
+        self.prix = int(prix)
         valid = False
         while not valid:
             localisation = input('Veuillez entrer une localisation: ')
-            valid = validateString(localisation)
+            valid = self.ctrl.validateString(localisation)
         self.localisation = localisation
 
+
+    def submit(self):
+        biens = self.ctrl.attachToPers(self.type,self.prix,self.localisation,self.surface,self.nombrePiece)
+        if len(biens) > 0:
+            lesBiens = "Les biens : \n"
+            for bien in biens:
+                lesBiens += bien.__str__()
+            print(lesBiens)
+
     def askDynamicData(self,type):
+        self.nombrePiece = None
+        self.surface = None
         if self.type == 1 or self.type == 2 :#appartement ou maison
             valid = False
-            nombrePiece = None
+            TestNombrePiece = None
             while not valid:
-                nombrePiece = input('Veuillez entrer un nombre de piece: ')
-                valid = validateNumber(nombrePiece)
-            self.nombrePiece = int(nombrePiece)
+                TestNombrePiece = input('Veuillez entrer un nombre de piece: ')
+                valid = self.ctrl.validateNumber(TestNombrePiece)
+            self.nombrePiece = int(TestNombrePiece)
 
         if self.type == 3 or self.type == 2:#terrain ou maison
             valid = False
-            surface = None
+            TestSurface = None
             while not valid:
-                surface = input('Veuillez entrer une surface en m²: ')
-                valid = validateNumber(surface)
-            self.surface = int(surface)
+                TestSurface = input('Veuillez entrer une surface en m²: ')
+                valid = self.ctrl.validateNumber(TestSurface)
+            self.surface = int(TestSurface)
+            self.submit()
+
 
     def __str__(self):
         result = f"Type : {self.type}\n"
@@ -65,5 +79,10 @@ class DialAchatBien:
 
 
 if __name__ == '__main__':
-    dial = DialAchatBien(None,None)
+    pers = Physique("Nom", "add","0123456789","test@osef.fr")
+    agence = Agence()
+    maison = Maison(3,"osef","osef","osef","osef",3,3,"osef","osef","osef")
+    print(maison.prix)
+    agence.biensImmobiliers.append(maison)
+    dial = DialAchatBien(pers , agence)
     print(dial)
