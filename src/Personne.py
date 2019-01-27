@@ -12,3 +12,9 @@ class Personne:
 
     def ajoutVoeux(self, voeux ):
         self.voeux = voeux
+
+    def afficherNom(self):
+        print(self.nom)
+
+    def __str__(self):
+        return self.nom
