@@ -41,10 +41,12 @@ class DialAchatBien:
     def submit(self):
         biens = self.ctrl.attachToPers(self.type,self.prix,self.localisation,self.surface,self.nombrePiece)
         if len(biens) > 0:
-            lesBiens = "Les biens : \n"
+            lesBiens = "Les biens qui correspondent a votre voeux: \n"
             for bien in biens:
                 lesBiens += bien.__str__()
             print(lesBiens)
+        else:
+            print("Aucun bien enregistrés non correspond a votre voeux")
 
     def askDynamicData(self,type):
         self.nombrePiece = None
@@ -82,7 +84,5 @@ if __name__ == '__main__':
     pers = Physique("Nom", "add","0123456789","test@osef.fr")
     agence = Agence()
     maison = Maison(3,"osef","osef","osef","osef",3,3,"osef","osef","osef")
-    print(maison.prix)
     agence.biensImmobiliers.append(maison)
     dial = DialAchatBien(pers , agence)
-    print(dial)
