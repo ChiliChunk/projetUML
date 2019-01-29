@@ -1,5 +1,5 @@
 from src.Rdv import Rdv,TypesRdv
-from src.BienImmobilier import TypesBien
+from src.BienImmobilier import BienImmobilier
 class Agence:
     def __init__(self , nom="Agence Par defaut"):
         self.rdvs = []
@@ -26,6 +26,7 @@ class Agence:
         for bien in self.biensImmobiliers:
             if self._voeuxEqualsBiens(voeux,bien):
                 result.append(bien)
+        return result
 
     def checkBien(self, bien):
         res = []
@@ -39,13 +40,13 @@ class Agence:
     def _voeuxEqualsBiens(cls , voeux, bien):
         if voeux.typeBien == bien.type: #si le voeux et le bien sont du meme type
             if voeux.prixSouhaite >= bien.prix: # et que le prix bien est egale ou inferieur au prix souhaité
-                if voeux.typeBien == TypesBien.MAISON: # si le voeux est une maison
+                if voeux.typeBien == BienImmobilier.TypesBien.MAISON: # si le voeux est une maison
                     if voeux.surfaceAuSol == bien.surface and voeux.nombrePiece == bien.nbPiece:
                         return True
-                elif voeux.typeBien == TypesBien.APPARTEMENT:
+                elif voeux.typeBien == BienImmobilier.TypesBien.APPARTEMENT:
                     if voeux.nombrePiece == bien.nbPiece:
                         return True
-                elif voeux.typeBien == TypesBien.TERRAIN:
+                elif voeux.typeBien == BienImmobilier.TypesBien.TERRAIN:
                     if voeux.surfaceAuSol == bien.surface:
                         return True
         return False

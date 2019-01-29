@@ -1,101 +1,88 @@
-from tkinter import *
-from src.Physique import Physique
-from src.Voeux import BienImmobilier
-from src.BienImmobilier import BienImmobilier
-import re
+from src.Physique import Physique # pour le main de test
+from src.Agence import Agence # pour le main de test
+from src.Maison import Maison # pour le main de test
+
+from src.controller.CtrlDialAchatBien import CtrlDialAchatBien
 
 class DialAchatBien:
-
-    def __init__(self , personne):
-        frame = Tk()
-        self.master = frame
-        self.localisation = StringVar()
-        self.nbPiece = StringVar()
-        self.prix = StringVar()
-        self.surface = StringVar()
-        self.typeSelected = ''
-        self.personne = personne
-        self.errorLabel = Label(frame , text=None)
-        print(self.errorLabel)
-
-    def update(self):
-        for widget in self.master.winfo_children():
-            if widget.grid_info().get('row') != None:
-                if widget.grid_info().get('row') >= 4:
-                    widget.destroy()
-
-    def renderFields(self):
-
-        self.update()
-
-        Label(self.master, text="Prix souhaité").grid(row=2)
-        entryPrix = Entry(self.master , textvariable=self.prix)
-        entryPrix.grid(row=2, column=1)
-        Label(self.master, text="Localisation").grid(row=3)
-        entryLocalisation = Entry(self.master , textvariable=self.localisation)
-        entryLocalisation.grid(row=3, column=1)
-        if typeSelected == "Appartement":
-            labNbPiece = Label(self.master, text="Nombre de piece").grid(row=4)
-            entryNbPice = Entry(self.master , textvariable=self.nbPiece)
-            entryNbPice.grid(row=4, column=1)
-
-        if typeSelected == "Terrain":
-            labSurface = Label(self.master, text="Surface (m²)").grid(row=4)
-            entrySurface = Entry(self.master , textvariable=self.surface)
-            entrySurface.grid(row=4, column=1)
-
-        if typeSelected == "Maison":
-            labNbPiece =  Label(self.master, text="Nombre de piece").grid(row=4)
-            entrySurface = Label(self.master, text="Surface (m²)").grid(row=5)
-            entryNbPice = Entry(self.master , textvariable=self.nbPiece)
-            entrySurface = Entry(self.master , textvariable=self.surface)
-            entryNbPice.grid(row=4, column=1)
-            entrySurface.grid(row=5, column=1)
-
-        submit = Button(self.master , text = "Enregistrer" ,command=self.submitHandler).grid(row="6")
-
-    def submitHandler(self):
-        self.errorLabel['test'] = 'TEST'
-        self.errorLabel.grid(row="7")
-        if typeSelected == 'Appartement':
-            if re.fullmatch('[0-9]*' , self.prix.get()) and re.fullmatch('[0-9]*' , self.nbPiece.get()):
-                voeux = BienImmobilier (BienImmobilier.TypesBien.APPARTEMENT, int(self.prix.get()), self.localisation, int(self.nbPiece.get()))
-                self.personne.ajoutVoeux(voeux)
-            else:
-                ...
-        elif typeSelected == 'Maison':
-            voeux = BienImmobilier (BienImmobilier.TypesBien.MAISON, int(self.prix.get()), self.localisation.get(), int(self.nbPiece.get()), int(self.surface.get()))
-            self.personne.ajoutVoeux(voeux)
-
-        elif typeSelected == 'Terrain':
-            voeux = BienImmobilier (BienImmobilier.TypesBien.TERRAIN, int(self.prix.get()), self.localisation.get(), int(self.surface.get()))
-            self.personne.ajoutVoeux(voeux)
-
-        print(self.localisation.get())
-        print(self.nbPiece.get())
-        print(self.prix.get())
-        print(self.surface.get())
+    def __init__(self , personne , agence):
+        self.ctrl = CtrlDialAchatBien(personne , agence)
+        self.askType()
 
 
-    def changeHandler(self,event):
-        global typeSelected
-        typeSelected = event
-        self.renderFields()
+    def askType(self):
+        valid = False
+        while not valid:
+            type = input('Veuillez entrer un type de voeux:\n'
+                         '1 : Appartement\n'
+                         '2 : Maison\n'
+                         '3 : Terrain\n')
+            valid = self.ctrl.validateType(type)
 
-    def renderDropdownMenu(self):
-        variable = StringVar (self.master)
-        variable.set("Choose")  # default value
-        OptionMenu(self.master, variable, "Appartement", "Terrain", "Maison", command=self.changeHandler).grid(row=1, column="1")
+        self.type = int(type)
+        self.askStaticData()
+        self.askDynamicData(type)
+
+    def askStaticData(self):
+        valid = False
+        prix = None
+        localisation = None
+        while not valid:
+            prix = input('Veuillez entrer un prix max souhaité en €: ')
+            valid = self.ctrl.validateNumber(prix)
+        self.prix = int(prix)
+        valid = False
+        while not valid:
+            localisation = input('Veuillez entrer une localisation: ')
+            valid = self.ctrl.validateString(localisation)
+        self.localisation = localisation
 
 
-    def render(self):
+    def submit(self):
+        biens = self.ctrl.attachToPers(self.type,self.prix,self.localisation,self.surface,self.nombrePiece)
+        if len(biens) > 0:
+            lesBiens = "Les biens qui correspondent a votre voeux: \n"
+            for bien in biens:
+                lesBiens += bien.__str__()
+            print(lesBiens)
+        else:
+            print("Aucun bien enregistrés non correspond a votre voeux")
 
-        Label(self.master, text="Entrer un voeux d'achat").grid(row=0 , sticky=(E,W))
-        self.master.title("Ajout d'un voeux")
-        self.renderDropdownMenu()
-        mainloop( )
+    def askDynamicData(self,type):
+        self.nombrePiece = None
+        self.surface = None
+        if self.type == 1 or self.type == 2 :#appartement ou maison
+            valid = False
+            TestNombrePiece = None
+            while not valid:
+                TestNombrePiece = input('Veuillez entrer un nombre de piece: ')
+                valid = self.ctrl.validateNumber(TestNombrePiece)
+            self.nombrePiece = int(TestNombrePiece)
+
+        if self.type == 3 or self.type == 2:#terrain ou maison
+            valid = False
+            TestSurface = None
+            while not valid:
+                TestSurface = input('Veuillez entrer une surface en m²: ')
+                valid = self.ctrl.validateNumber(TestSurface)
+            self.surface = int(TestSurface)
+            self.submit()
 
 
-phys = Physique('test','add' , 'numTel' , 'email')
-frame = DialAchatBien(phys)
-frame.render()
+    def __str__(self):
+        result = f"Type : {self.type}\n"
+        result += f"Prix : {self.prix}\n"
+        result += f"Localisation : {self.localisation}\n"
+        if self.type == 1 or self.type == 2:
+            result += f"Nombre de Piece : {self.nombrePiece}\n"
+        if self.type == 3 or self.type == 2:
+            result += f"Surface : {self.surface}\n"
+        return result
+
+
+if __name__ == '__main__':
+    pers = Physique("Nom", "add","0123456789","test@osef.fr")
+    agence = Agence()
+    maison = Maison(3,"osef","osef","osef","osef",3,3,"osef","osef","osef")
+    agence.biensImmobiliers.append(maison)
+    dial = DialAchatBien(pers , agence)

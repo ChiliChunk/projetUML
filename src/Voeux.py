@@ -14,3 +14,17 @@ class Voeux:
         if typeBien == BienImmobilier.TypesBien.MAISON:
             self.nombrePiece = nombrePiece
             self.surfaceAuSol = surfaceAuSol
+
+    def __str__(self):
+        result = ""
+        if self.typeBien == BienImmobilier.TypesBien.MAISON:
+            result += "Type  : MAISON\n"
+        elif self.typeBien == BienImmobilier.TypesBien.APPARTEMENT:
+            result += "Type : APPARTEMENT\n"
+        else:
+            result += "Type : TERRAIN\n"
+        result += f"prix : {self.prixSouhaite}\n" \
+                  f"localisation : {self.localisation}\n" \
+                  f"nombrePiece : {self.nombrePiece}\n" \
+                  f"surface au sol : {self.surfaceAuSol}"
+        return result
