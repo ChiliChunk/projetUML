@@ -6,13 +6,18 @@ class BienImmobilier :
         APPARTEMENT =2
         TERRAIN =3
 
-    def __init__(self, prix,dateVente,adresse,orientation,dateDispo,id):
-        self.prix = prix
-        self.dateVente = dateVente
-        self.adresse = adresse
-        self.orientation = orientation
-        self.dateDispo = dateDispo
-        self.id = id
+    idCounter = 0
 
-    def inscrire (self,agence):
+    def __init__(self, prix, dateVente, adresse, orientation, dateDispo, vendeur):
+            self.prix = prix
+            self.dateVente = dateVente
+            self.adresse = adresse
+            self.orientation = orientation
+            self.dateDispo = dateDispo
+            self.id = id
+            self.vendeur = vendeur
+            BienImmobilier.idCounter += 1
+            self.id = BienImmobilier.idCounter
+
+    def inscrire(self, agence):
         agence.biensImmobiliers.append(self)
