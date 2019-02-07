@@ -41,3 +41,11 @@ class CtrlDialAchatBien:
 
     def validateString(self , string):
         return len(string) > 0
+
+    def removeVoeux(self, voeu):
+        for personne in self.agence.personnes:
+            for voeux in personne.voeux:
+                if voeux == voeu:
+                    personne.voeux.remove(voeu)
+                    return True
+        return False

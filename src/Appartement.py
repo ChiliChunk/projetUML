@@ -1,8 +1,8 @@
 from src.BienImmobilier import BienImmobilier
 
 class Appartement(BienImmobilier):
-    def __init__(self,prix,dateVente,adresse,orientation,dateDispo, nbPiece,numEtage, chargesMensuelles, id):
-        super().__init__(prix,dateVente,adresse,orientation,dateDispo, id)
+    def __init__(self,prix,dateVente,adresse,orientation,dateDispo,vendeur, nbPiece,numEtage, chargesMensuelles):
+        super().__init__(prix,dateVente,adresse,orientation,dateDispo, vendeur)
         self.nbPiece = nbPiece
         self.numEtage = numEtage
         self.chargesMensuelles = chargesMensuelles
