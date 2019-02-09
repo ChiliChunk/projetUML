@@ -1,5 +1,6 @@
 import re
 import src.Personne as prs
+import src.IHM.Menu as men
 regXmail ="[^@]+@[^@]+\.[^@]+"
 regXTel ="[0-9]{10,15}"
 
@@ -14,3 +15,5 @@ class ctrlAjoutPersonne:
     def ajoutPers(self,nom,adresse,tel,adresseMail):
         pers = prs.Personne(nom, adresse, tel, adresseMail)
         pers.inscrire(self.agence)
+    def redirection(self):
+        men.Menu(self.agence)
