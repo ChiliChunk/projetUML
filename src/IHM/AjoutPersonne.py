@@ -21,9 +21,10 @@ class AjoutPersonne:
                 print("Entrez un tel valide")
         while 1:
             adresseMail = input("Entrez l'adresse mail :")
-            if self.ctrl.validateInputMail():
+            if self.ctrl.validateInputMail(adresseMail):
                 break
             else:
                 print("Entrez un email valide")
         self.ctrl.ajoutPers(nom,adresse,tel,adresseMail)
         print("Personne inscrite !")
+        self.ctrl.redirection()
