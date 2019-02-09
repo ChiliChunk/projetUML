@@ -1,6 +1,6 @@
 import src.Agence as ag
 import re
-import src.IHM.menu as men
+import src.IHM.Menu as men
 def listePersonnes(agence):
     i=1
     dicoPers ={}
