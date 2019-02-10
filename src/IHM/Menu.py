@@ -1,4 +1,3 @@
-import src.IHM.ListePersonnes as lstPers
 import src.IHM.AjoutPersonne as ajtPers
 import src.controller.ctrlMenu as ctrl
 

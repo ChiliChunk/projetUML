@@ -9,10 +9,14 @@ class ctrlListeComposants:
         if type == typeCompo.PERSONNE.value:
             self.compos = agence.personnes
         elif type == typeCompo.BIEN.value:
-            self.compos = []
-            for bien in agence.biensImmobiliers:
-                if bien.vendeur == personne:
-                    self.compos.append(bien)
+            if personne:
+                self.compos = []
+                for bien in agence.biensImmobiliers:
+                    if personne:
+                        if bien.vendeur == personne:
+                            self.compos.append(bien)
+            else:
+                self.compos=agence.biensImmobiliers
         elif type == typeCompo.RDV.value :
             self.compos = agence.rdvs
         else:
