@@ -1,24 +1,25 @@
-from src.Model import Appartement, Maison, Terrain
-
+from src.Model import Terrain, Appartement, Maison
+import re
+regXDate = "[0-9]{2}\/[0-9]{2}\/[0-9]{4}"
 
 class CtrlDialBien:
 
 
-    def __init__(self,personne, agence):
+    def __init__(self, agence,personne):
         self.personne = personne
         self.agence = agence
 
-
-    def attachToPers (self,type,prix, dateVente, adresse, orientation, dateDispo, surface=None, nbPiece=None,nbEtage=None,moyenChauffage=None, longueurFacade=None, numEtage=None, chargesMensuelles=None):
+    #Why dateVente always None
+    def attachToPers (self,type,prix, adresse, orientation, dateDispo, surface=None, nbPiece=None,nbEtage=None,moyenChauffage=None, longueurFacade=None, numEtage=None, chargesMensuelles=None):
         monBien = None
         if type == 1:
-            monBien = Appartement.Appartement(prix,dateVente,adresse,orientation,dateDispo,self.personne,nbPiece,numEtage,chargesMensuelles)
+            monBien = Appartement.Appartement(prix, None, adresse, orientation, dateDispo, self.personne, nbPiece, numEtage, chargesMensuelles)
         elif type == 2:
-            monBien = Maison.Maison(prix,dateVente,adresse,orientation,dateDispo,self.personne,surface,nbPiece,nbEtage,moyenChauffage)
+            monBien = Maison.Maison(prix, None, adresse, orientation, dateDispo, self.personne, surface, nbPiece, nbEtage, moyenChauffage)
         elif type == 3:
-            monBien = Terrain.Terrain(prix,dateVente,adresse,orientation,dateDispo,self.personne,surface,longueurFacade)
+            monBien = Terrain.Terrain(prix, None, adresse, orientation, dateDispo, self.personne, surface, longueurFacade)
         self.bien = monBien
-        self.agence.biensImmobiliers += monBien
+        self.agence.biensImmobiliers.append(monBien)
         return self.agence.checkBien(monBien)
 
 
@@ -41,15 +42,18 @@ class CtrlDialBien:
         return int(number) > 0
 
     def validateDate(self, date):
+        if not re.fullmatch(regXDate,date):
+            return False
         testdate = date.split("/")
         try:
             jour = int(testdate[0])
             mois = int(testdate[1])
-            annee = int(testdate)
+            annee = int(testdate[2])
             if not 32>jour>0 :
                 return False
             if not 13>mois>0:
                 return False
+            #Need to change that !
             if not annee>2018:
                 return False
         except ValueError:

@@ -6,9 +6,9 @@ regXnbCompo = "[0-9]+"
 class ctrlListeComposants:
     def __init__(self, agence, type, personne=None):
         self.agence = agence
-        if type == typeCompo.PERSONNE.value:
+        if type == typeCompo.PERSONNE:
             self.compos = agence.personnes
-        elif type == typeCompo.BIEN.value:
+        elif type == typeCompo.BIEN:
             if personne:
                 self.compos = []
                 for bien in agence.biensImmobiliers:
@@ -17,7 +17,7 @@ class ctrlListeComposants:
                             self.compos.append(bien)
             else:
                 self.compos=agence.biensImmobiliers
-        elif type == typeCompo.RDV.value :
+        elif type == typeCompo.RDV :
             self.compos = agence.rdvs
         else:
             raise Exception

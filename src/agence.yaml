@@ -1,0 +1,30 @@
+!!python/object:src.Model.Agence.Agence
+annonces: []
+biensImmobiliers:
+- !!python/object:src.Model.Appartement.Appartement
+  adresse: z
+  chargesMensuelles: 34
+  dateDispo: 12/12/2020
+  dateVente: null
+  id: !!python/name:builtins.id ''
+  nbPiece: 3
+  numEtage: 3
+  orientation: N
+  prix: 1
+  type: !!python/object/apply:src.Model.BienImmobilier.TypesBien [2]
+  vendeur: &id001 !!python/object:src.Model.Physique.Physique
+    adresse: 24 rue de la chancla
+    email: nil@lin.nilin
+    nom: Nils
+    numTel: 0123456789
+    voeux: []
+nom: Toto
+personnes:
+- *id001
+- !!python/object:src.Model.Physique.Physique
+  adresse: Coucou
+  email: Aze@o.co
+  nom: Thomas
+  numTel: 021234567898
+  voeux: []
+rdvs: []

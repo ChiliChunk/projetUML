@@ -10,10 +10,7 @@ class Maison(BienImmobilier):
         self.type = BienImmobilier.TypesBien.MAISON
 
     def __str__(self):
-        result = "Type : MAISON \n"
-        result += f"prix : {self.prix}\n"
-        result += f"date de vente : {self.dateVente}\n"
-        result += f"adresse: {self.adresse}\n"
+        result = super.__str__()
         result += f"orientation : {self.orientation}\n"
         result += f"date dispo: {self.dateDispo}\n"
         result += f"surface: {self.surface}\n"

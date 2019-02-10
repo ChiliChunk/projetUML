@@ -1,5 +1,3 @@
-from src.Mandat import Mandat
-from src.PromesseDeVente import PromesseDeVente
 from src.Model.Rdv import Rdv,TypesRdv
 from src.Model.BienImmobilier import BienImmobilier
 class Agence:
@@ -9,19 +7,6 @@ class Agence:
         self.annonces = []
         self.personnes = []
         self.nom = nom
-
-    def prendreRdvMandat(self, bien,date):
-        self.rdvs.append(Rdv(bien=bien,vendeur=bien.vendeur, type=TypesRdv.MANDAT,date=date))
-        #return Mandat(Personne=bien.vendeur, BienImmobilier=bien)
-
-    def prendreRdvVente(self, bien, date, acheteur):
-        ...
-        #self.rdvs.append(Rdv(bien=bien,vendeur=bien.vendeur,acheteur=acheteur, type=TypesRdv.VENTE,date=date))
-        #return PromesseDeVente()
-
-    def prendreRdvVisite(self, bien,date, visiteur):
-        ...
-        #self.rdvs.append(Rdv(bien=bien,vendeur=bien.vendeur, type=TypesRdv.VISITE,date=date))
 
     def checkVoeux (self , voeux):
         result = []
@@ -33,9 +18,10 @@ class Agence:
     def checkBien(self, bien):
         res = []
         for personne in self.personnes:
-            for voeu in personne.voeux:
-                if self._voeuxEqualsBiens(voeu,bien):
-                    res += [voeu]
+            if personne.voeux:
+                for voeu in personne.voeux:
+                    if self._voeuxEqualsBiens(voeu,bien):
+                        res += [voeu]
         return res
 
     @classmethod

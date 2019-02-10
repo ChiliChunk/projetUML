@@ -8,6 +8,7 @@ class DialAchatBien:
     def __init__(self , personne , agence):
         self.ctrl = CtrlDialAchatBien(personne , agence)
         self.askType()
+        self.ctrl.re
 
 
     def askType(self):

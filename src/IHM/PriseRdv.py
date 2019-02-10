@@ -1,7 +1,8 @@
 import src.controller.ctrlPriseRdv as ctrl
 import src.IHM.ListeComposants as lst
 import src.controller.ctrlListeComposants as lstEnum
-import src.Rdv as rdv
+import src.Model.Rdv as rdv
+
 class PriseRdv:
     def __init__(self,agence,personne):
         self.ctrl = ctrl.ctrlPriseRdv(agence,personne)
@@ -18,11 +19,11 @@ class PriseRdv:
             else:
                 choice = input("Veuillez choisir une option valide\n")
         #Use of controller and then test directly ?..
-        if choice ==rdv.TypesRdv.VENTE.value:
+        if choice == rdv.TypesRdv.VENTE.value:
             self.inputVente()
-        elif choice==rdv.TypesRdv.MANDAT.value:
+        elif choice== rdv.TypesRdv.MANDAT.value:
             self.inputMandat()
-        elif choice ==rdv.TypesRdv.VISITE.value:
+        elif choice == rdv.TypesRdv.VISITE.value:
             self.inputVisite()
         print("Rdv ajouté")
         self.ctrl.redirect()
@@ -31,9 +32,9 @@ class PriseRdv:
         type= rdv.TypesRdv.VENTE
         date = self.inputDate()
         vendeur = self.ctrl.personne
-        input("Veuillez choisir l'acheteur")
+        print("Veuillez choisir l'acheteur")
         acheteur = self.inputPersonne()
-        input("Veuillez selectionner le bien a vendre")
+        print("Veuillez selectionner le bien a vendre")
         bien = self.inputBien(vendeur)
         self.ctrl.submitRdv(type,date,bien=bien,acheteur=acheteur,vendeur=vendeur)
 
@@ -65,8 +66,8 @@ class PriseRdv:
         return date
 
     def inputPersonne(self):
-        list =lst.ListeComposants(self.ctrl.agence,lstEnum.typeCompo.PERSONNE)
+        list =lst.ListeComposants(agence=self.ctrl.agence,type=lstEnum.typeCompo.PERSONNE)
         return list.view()
     def inputBien(self,personne=None):
-        list =lst.ListeComposants(self.ctrl.agence,lstEnum.typeCompo.BIEN,personne=personne)
+        list =lst.ListeComposants(agence=self.ctrl.agence,type=lstEnum.typeCompo.BIEN,personne=personne)
         return list.view()

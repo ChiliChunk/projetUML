@@ -1,6 +1,6 @@
 import re
-import src.Rdv as rdv
 import src.IHM.Menu as men
+from src.Model.Rdv import Rdv
 regXchoice = "[123]"
 regXDate = "[0-9]{2}\/[0-9]{2}\/[0-9]{4}"
 class ctrlPriseRdv:
@@ -13,6 +13,6 @@ class ctrlPriseRdv:
     def validateInputDate(self, date):
         return re.fullmatch(regXDate,date)
     def submitRdv(self, type,date,bien=None,acheteur=None,vendeur=None):
-        self.agence.rdvs.append(rdv.Rdv(type=type,date=date,bien=bien,acheteur=acheteur,vendeur=vendeur))
+        self.agence.rdvs.append(Rdv(type=type, date=date, bien=bien, acheteur=acheteur, vendeur=vendeur))
     def redirect(self):
         men.Menu(self.agence)

@@ -1,7 +1,7 @@
 class Personne:
 
-    def __init__(self, unVoeux = None):
-        self.voeux = unVoeux
+    def __init__(self):
+        self.voeux = []
 
     def inscrire(self, agence):
         agence.personnes.append(self)

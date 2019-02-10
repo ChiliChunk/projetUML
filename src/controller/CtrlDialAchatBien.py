@@ -1,6 +1,6 @@
 from src.Model.Voeux import Voeux
 from src.Model.BienImmobilier import BienImmobilier
-
+import src.IHM.Menu as men
 class CtrlDialAchatBien:
 
 
@@ -49,3 +49,6 @@ class CtrlDialAchatBien:
                     personne.voeux.remove(voeu)
                     return True
         return False
+
+    def redirect(self):
+        men.Menu(self.agence)
