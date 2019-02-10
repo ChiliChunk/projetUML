@@ -1,7 +1,6 @@
 class Personne:
 
-    def __init__(self, nom, addresse, numTel, email, unVoeux = None):
-        self.voeux = unVoeux
+    def __init__(self, nom, addresse, numTel, email):
         self.nom = nom
         self.addresse = addresse
         self.numTel = numTel
