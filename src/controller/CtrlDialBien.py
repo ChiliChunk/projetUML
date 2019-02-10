@@ -1,5 +1,5 @@
 from src.Model import Terrain, Appartement, Maison
-import re
+import re, datetime
 regXDate = "[0-9]{2}\/[0-9]{2}\/[0-9]{4}"
 
 class CtrlDialBien:
@@ -46,15 +46,12 @@ class CtrlDialBien:
             return False
         testdate = date.split("/")
         try:
+
             jour = int(testdate[0])
             mois = int(testdate[1])
             annee = int(testdate[2])
-            if not 32>jour>0 :
-                return False
-            if not 13>mois>0:
-                return False
-            #Need to change that !
-            if not annee>2018:
+            date = datetime.date(day=jour,month=mois,year=annee)
+            if date <= datetime.date.today():
                 return False
         except ValueError:
             return False

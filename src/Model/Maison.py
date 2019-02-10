@@ -1,4 +1,4 @@
-from src.Model.BienImmobilier import BienImmobilier
+from src.Model.BienImmobilier import BienImmobilier, TypesBien
 
 class Maison(BienImmobilier):
     def __init__(self,prix,dateVente,adresse,orientation,dateDispo,vendeur, surface, nbPiece,nbEtage,moyenChauffage):
@@ -7,10 +7,10 @@ class Maison(BienImmobilier):
         self.nbPiece = nbPiece
         self.nbEtage = nbEtage
         self.moyenChauffage = moyenChauffage
-        self.type = BienImmobilier.TypesBien.MAISON
+        self.type = TypesBien.MAISON
 
     def __str__(self):
-        result = super.__str__()
+        result = super.__str__(self)
         result += f"orientation : {self.orientation}\n"
         result += f"date dispo: {self.dateDispo}\n"
         result += f"surface: {self.surface}\n"

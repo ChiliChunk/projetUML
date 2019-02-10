@@ -6,21 +6,46 @@ biensImmobiliers:
   chargesMensuelles: 34
   dateDispo: 12/12/2020
   dateVente: null
-  id: !!python/name:builtins.id ''
+  id: &id001 !!python/name:builtins.id ''
   nbPiece: 3
   numEtage: 3
   orientation: N
   prix: 1
   type: !!python/object/apply:src.Model.BienImmobilier.TypesBien [2]
-  vendeur: &id001 !!python/object:src.Model.Physique.Physique
+  vendeur: &id002 !!python/object:src.Model.Physique.Physique
     adresse: 24 rue de la chancla
     email: nil@lin.nilin
     nom: Nils
     numTel: 0123456789
     voeux: []
+- !!python/object:src.Model.Maison.Maison
+  TypesBien: ''
+  adresse: West Cost
+  dateDispo: 06/01/2036
+  dateVente: null
+  id: *id001
+  moyenChauffage: Bois
+  nbEtage: 2
+  nbPiece: 10
+  orientation: S
+  prix: 50000
+  surface: 145
+  type: !!python/object/apply:src.Model.BienImmobilier.TypesBien [1]
+  vendeur: *id002
+- !!python/object:src.Model.Terrain.Terrain
+  adresse: 8 rue de la mirabelle
+  dateDispo: 10/02/2019
+  dateVente: null
+  id: *id001
+  longueurFacade: 62
+  orientation: S
+  prix: 60000
+  surfaceSol: 50
+  type: !!python/object/apply:src.Model.BienImmobilier.TypesBien [3]
+  vendeur: *id002
 nom: Toto
 personnes:
-- *id001
+- *id002
 - !!python/object:src.Model.Physique.Physique
   adresse: Coucou
   email: Aze@o.co

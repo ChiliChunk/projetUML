@@ -1,4 +1,4 @@
-from src.Model.BienImmobilier import BienImmobilier
+from src.Model.BienImmobilier import BienImmobilier, TypesBien
 
 
 class Terrain(BienImmobilier):
@@ -6,7 +6,7 @@ class Terrain(BienImmobilier):
         super().__init__(prix, dateVente, adresse, orientation, dateDispo, vendeur)
         self.surfaceSol = surfaceSol
         self.longueurFacade = longueurFacade
-        self.type = BienImmobilier.TypesBien.TERRAIN
+        self.type = TypesBien.TERRAIN
 
     def __str__(self):
         result = super.__str__()
