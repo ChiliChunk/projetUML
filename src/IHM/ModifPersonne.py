@@ -2,6 +2,7 @@ import src.controller.ctrlModifPersonne as ctrl
 class ModifPersonne:
     def __init__(self,agence, personne):
         self.ctrl = ctrl.ctrlModifPersonne(agence,personne)
+        self.view()
 
     def view(self):
         print("Option sur "+str(self.ctrl.personne))

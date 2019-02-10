@@ -1,7 +1,8 @@
 import re
 import src.IHM.AjoutPersonne as ajt
-import src.IHM.ListePersonnes as lst
-import src.init as main
+import src.IHM.init as main
+from src.IHM.ListeComposants import ListeComposants
+from src.IHM.ModifPersonne import ModifPersonne
 regXchoice = "[123]"
 
 
@@ -13,7 +14,10 @@ class ctrlMenu:
         return re.fullmatch(regXchoice,choice)
     def chooseOption(self,choice):
         if choice == "1":
-            lst.ListePersonnes(self.agence)
+            list = ListeComposants(self.agence,1)
+            pers = list.view()
+            ModifPersonne(agence=self.agence,personne=pers)
+            #lst.ListePersonnes(self.agence)
         elif choice == "2":
             ajt.AjoutPersonne(self.agence)
         elif choice == "3":

@@ -17,4 +17,4 @@ class ctrlModifPersonne:
         elif choice == "2":
             DialAchatBien(self.agence,self.personne)
         elif choice == "3":
-            ...#PriseRdv
+            ...#Rdv

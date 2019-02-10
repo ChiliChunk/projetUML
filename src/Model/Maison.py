@@ -21,3 +21,4 @@ class Maison(BienImmobilier):
         result += f"nombre d etage: {self.nbEtage}\n"
         result += f"moyen de chauffage: {self.moyenChauffage}\n"
         return result
+

@@ -1,7 +1,7 @@
 from enum import Enum
 from src.Model.PromesseDeVente import PromesseDeVente
 class Rdv:
-    def __init__(self,bien, type,date,acheteur=None,vendeur=None):
+    def __init__(self, type,date,bien=None,acheteur=None,vendeur=None):
         self.acheteur =acheteur
         self.vendeur = vendeur
         self.bien = bien
