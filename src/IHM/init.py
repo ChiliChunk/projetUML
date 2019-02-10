@@ -1,6 +1,7 @@
 import signal, os
 import yaml
 import src.IHM.Menu as men
+import src.Model.Agence as ag
 
 
 #A ton vraiment la visibilité de l'agence
