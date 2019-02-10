@@ -75,6 +75,7 @@ class DialBien:
                 TestNombrePiece = input('Veuillez entrer un nombre de piece: ')
                 valid = self.ctrl.validateNumber(TestNombrePiece)
             self.nombrePiece = int(TestNombrePiece)
+
         if self.type == 1:
             valid = False
             while not valid:
@@ -102,7 +103,7 @@ class DialBien:
                 TestSurface = input('Veuillez entrer une surface en m²: ')
                 valid = self.ctrl.validateNumber(TestSurface)
             self.surface = int(TestSurface)
-            self.submit()
+
 
         if self.type == 3:
             valid = False
@@ -110,6 +111,8 @@ class DialBien:
                 test_longueur_facade = input("Longueur de la facade du terrain en m : ")
                 valid = self.ctrl.validateNumber(test_longueur_facade)
             self.longueur_facade = int(test_longueur_facade)
+
+        self.submit()
 
     def __str__(self):
         result = f"Type : {self.type}\n"

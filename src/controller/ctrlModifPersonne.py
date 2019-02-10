@@ -1,10 +1,11 @@
 import re
-import src.IHM.DialAchatBien as dial
+from src.IHM.DialBien import DialBien
+from src.IHM.DialAchatBien import  DialAchatBien
 regXchoice = "[123]"
 
 class ctrlModifPersonne:
     def __init__(self,agence,personne):
-        self.agence =agence
+        self.agence = agence
         self.personne = personne
     def nomPers(self):
         return self.personne.nom
@@ -12,8 +13,8 @@ class ctrlModifPersonne:
         return re.fullmatch(regXchoice,choice)
     def submitChoice(self,choice):
         if choice == "1":
-            ...#AjoutBien
+            DialBien(self.agence,self.personne)
         elif choice == "2":
-            dial.DialAchatBien(personne=self.personne,agence=self.agence)
+            DialAchatBien(self.agence,self.personne)
         elif choice == "3":
             ...#Rdv
