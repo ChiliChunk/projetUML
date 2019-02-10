@@ -1,5 +1,6 @@
 import re
 import src.IHM.DialAchatBien as dial
+import src.IHM.PriseRdv as rdv
 regXchoice = "[123]"
 
 class ctrlModifPersonne:
@@ -16,4 +17,4 @@ class ctrlModifPersonne:
         elif choice == "2":
             dial.DialAchatBien(personne=self.personne,agence=self.agence)
         elif choice == "3":
-            ...#Rdv
+            rdv.PriseRdv(self.agence,self.personne)

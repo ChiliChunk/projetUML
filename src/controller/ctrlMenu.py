@@ -14,6 +14,8 @@ class ctrlMenu:
         return re.fullmatch(regXchoice,choice)
     def chooseOption(self,choice):
         if choice == "1":
+            #Doesn't respect MVC
+            print("Liste des personnes :")
             list = ListeComposants(self.agence,1)
             pers = list.view()
             ModifPersonne(agence=self.agence,personne=pers)
@@ -22,4 +24,4 @@ class ctrlMenu:
             ajt.AjoutPersonne(self.agence)
         elif choice == "3":
             main.save(self.agence)
-            exit(0)
+            exit(0) 

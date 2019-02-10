@@ -13,6 +13,6 @@ class Rdv:
             return PromesseDeVente()
 
 class TypesRdv(Enum):
-    VENTE = 1
-    MANDAT = 2
-    VISITE = 3
+    VENTE = "1"
+    MANDAT = "2"
+    VISITE = "3"
