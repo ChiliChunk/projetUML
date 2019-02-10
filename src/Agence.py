@@ -1,5 +1,7 @@
 from src.Rdv import Rdv,TypesRdv
 from src.BienImmobilier import BienImmobilier
+from src.Mandat import Mandat
+from src.PromesseDeVente import PromesseDeVente
 class Agence:
     def __init__(self , nom="Agence Par defaut"):
         self.rdvs = []
@@ -10,10 +12,12 @@ class Agence:
 
     def prendreRdvMandat(self, bien,date):
         self.rdvs.append(Rdv(bien=bien,vendeur=bien.vendeur, type=TypesRdv.MANDAT,date=date))
+        #return Mandat(Personne=bien.vendeur, BienImmobilier=bien)
 
     def prendreRdvVente(self, bien, date, acheteur):
         ...
-        #self.rdvs.append(Rdv(bien=bien,vendeur=bien.vendeur, type=TypesRdv.VENTE,date=date))
+        #self.rdvs.append(Rdv(bien=bien,vendeur=bien.vendeur,acheteur=acheteur, type=TypesRdv.VENTE,date=date))
+        #return PromesseDeVente()
 
     def prendreRdvVisite(self, bien,date, visiteur):
         ...

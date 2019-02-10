@@ -1,5 +1,6 @@
 from src.BienImmobilier import BienImmobilier
 
+
 class Maison(BienImmobilier):
     def __init__(self,prix,dateVente,adresse,orientation,dateDispo, surface, nbPiece,nbEtage,moyenChauffage, id):
         super().__init__(prix,dateVente,adresse,orientation,dateDispo,id)
@@ -21,3 +22,4 @@ class Maison(BienImmobilier):
         result += f"nombre d etage: {self.nbEtage}\n"
         result += f"moyen de chauffage: {self.moyenChauffage}\n"
         return result
+

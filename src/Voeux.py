@@ -7,7 +7,6 @@ class Voeux:
         self.typeBien = typeBien
         self.prixSouhaite = prixSouhaite
         self.localisation = localisation
-
         if typeBien == BienImmobilier.TypesBien.APPARTEMENT:
             self.nombrePiece = nombrePiece
         if typeBien == BienImmobilier.TypesBien.TERRAIN:
