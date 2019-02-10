@@ -19,3 +19,4 @@ class ListeAnnonce:
                 self.ctrl.processChoice(choice)
             else:
                 print("Veuillez entrez une option valide")
+

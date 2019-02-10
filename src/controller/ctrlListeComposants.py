@@ -15,6 +15,8 @@ class ctrlListeComposants:
                     self.compos.append(bien)
         elif type == typeCompo.RDV.value :
             self.compos = agence.rdvs
+        elif type== typeCompo.ANNONCE.value:
+            self.compos = agence.annonces
         else:
             raise Exception
 
@@ -31,3 +33,4 @@ class typeCompo(Enum):
     PERSONNE =1
     BIEN =2
     RDV=3
+    ANNONCE = 4
