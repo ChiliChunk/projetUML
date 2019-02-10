@@ -1,5 +1,3 @@
-from src.Mandat import Mandat
-from src.PromesseDeVente import PromesseDeVente
 from src.Model.Rdv import Rdv,TypesRdv
 from src.Model.BienImmobilier import BienImmobilier
 class Agence:
@@ -27,7 +25,8 @@ class Agence:
         result = []
         for bien in self.biensImmobiliers:
             if self._voeuxEqualsBiens(voeux,bien):
-                result.append(bien)
+                result=bien
+                break
         return result
 
     def checkBien(self, bien):
@@ -35,7 +34,8 @@ class Agence:
         for personne in self.personnes:
             for voeu in personne.voeux:
                 if self._voeuxEqualsBiens(voeu,bien):
-                    res += [voeu]
+                    res = voeu
+                    break
         return res
 
     @classmethod
