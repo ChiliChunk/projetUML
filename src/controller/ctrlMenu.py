@@ -1,6 +1,5 @@
 import re
 import src.IHM.AjoutPersonne as ajt
-import src.IHM.ListePersonnes as lst
 import src.IHM.init as main
 from src.IHM.ListeComposants import ListeComposants
 from src.IHM.ModifPersonne import ModifPersonne
@@ -17,7 +16,7 @@ class ctrlMenu:
         if choice == "1":
             list = ListeComposants(self.agence,1)
             pers = list.view()
-            ModifPersonne(self.agence,personne=pers)
+            ModifPersonne(agence=self.agence,personne=pers)
             #lst.ListePersonnes(self.agence)
         elif choice == "2":
             ajt.AjoutPersonne(self.agence)

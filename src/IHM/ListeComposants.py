@@ -6,8 +6,9 @@ class ListeComposants :
 
     def view(self):
         i = 1
-        for compo in self.ctrl.compo:
+        for compo in self.ctrl.compos:
             print(i, ") " + str(compo))
+            i+=1
         print("Entrez le numero pour interagir avec cette option \n(ou 0 pour revenir au menu) \n")
         while 1:
             choice = input()

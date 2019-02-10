@@ -1,4 +1,6 @@
 import src.controller.ctrlPriseRdv as ctrl
+import src.IHM.ListeComposants as lst
+import src.controller.ctrlListeComposants as lstEnum
 class PriseRdv:
     def __init__(self,agence,personne):
         self.ctrl = ctrl.ctrlPriseRdv(agence,personne)
@@ -24,7 +26,7 @@ class PriseRdv:
 
     def inputVente(self):
         date = self.inputDate()
-
+        input("Veuillez choisir ")
     def inputMandat(self):
         date = self.inputDate()
 
@@ -40,3 +42,7 @@ class PriseRdv:
             else:
                 date=input("Veuillez rentrer une date valide")
         return date
+
+    def inputPersonne(self):
+        list =lst.ListeComposants(self.ctrl.agence,lstEnum.typeCompo.PERSONNE)
+        return list.view()

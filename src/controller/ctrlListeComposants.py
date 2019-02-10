@@ -1,28 +1,31 @@
 from enum import Enum
 import re
-from src.IHM.Menu import Menu
+import src.IHM.Menu as men
 regXnbCompo = "[0-9]+"
 
 class ctrlListeComposants:
     def __init__(self, agence, type, personne=None):
-            if type == typeCompo.PERSONNE:
-                self.compos = agence.personnes
-            elif type == typeCompo.BIEN:
-                self.compos = []
-                for bien in agence.biensImmobiliers:
-                    if bien.vendeur == personne:
-                        self.compos.append(bien)
-            elif type == typeCompo.RDV :
-                self.compos = agence.rdvs
+        self.agence = agence
+        if type == typeCompo.PERSONNE.value:
+            self.compos = agence.personnes
+        elif type == typeCompo.BIEN.value:
+            self.compos = []
+            for bien in agence.biensImmobiliers:
+                if bien.vendeur == personne:
+                    self.compos.append(bien)
+        elif type == typeCompo.RDV.value :
+            self.compos = agence.rdvs
+        else:
+            raise Exception
 
     def validateInputChoice(self, choice):
-        return (not re.fullmatch(regXnbCompo, choice)==None) and int(choice)<len(self.compos)
+        return (not re.fullmatch(regXnbCompo, choice)==None) and int(choice)<=len(self.compos)
 
     def submitChoice(self, choice):
         if choice == "0":
-            Menu(self.agence)
+            men.Menu(self.agence)
         else:
-            return self.compos[choice-1]
+            return self.compos[int(choice)-1]
 
 class typeCompo(Enum):
     PERSONNE =1
