@@ -1,5 +1,5 @@
 import re
-import src.Model.Personne as prs
+from src.Model.Physique import Physique
 import src.IHM.Menu as men
 regXmail ="[^@]+@[^@]+\.[^@]+"
 regXTel ="[0-9]{10,15}"
@@ -13,7 +13,7 @@ class ctrlAjoutPersonne:
     def validateInputTel(selfself, input):
         return re.fullmatch(regXTel, input)
     def ajoutPers(self,nom,adresse,tel,adresseMail):
-        pers = prs.Personne(nom, adresse, tel, adresseMail)
+        pers = Physique(nom, adresse, tel, adresseMail)
         pers.inscrire(self.agence)
     def redirection(self):
         men.Menu(self.agence)

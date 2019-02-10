@@ -8,19 +8,6 @@ class Agence:
         self.personnes = []
         self.nom = nom
 
-    def prendreRdvMandat(self, bien,date):
-        self.rdvs.append(Rdv(bien=bien,vendeur=bien.vendeur, type=TypesRdv.MANDAT,date=date))
-        #return Mandat(Personne=bien.vendeur, BienImmobilier=bien)
-
-    def prendreRdvVente(self, bien, date, acheteur):
-        ...
-        #self.rdvs.append(Rdv(bien=bien,vendeur=bien.vendeur,acheteur=acheteur, type=TypesRdv.VENTE,date=date))
-        #return PromesseDeVente()
-
-    def prendreRdvVisite(self, bien,date, visiteur):
-        ...
-        #self.rdvs.append(Rdv(bien=bien,vendeur=bien.vendeur, type=TypesRdv.VISITE,date=date))
-
     def checkVoeux (self , voeux):
         result = []
         for bien in self.biensImmobiliers:

@@ -1,7 +1,7 @@
 import signal, os
-import src.Agence as ag
 import yaml
 import src.IHM.Menu as men
+
 
 #A ton vraiment la visibilité de l'agence
 def handlerLeave(num_sig,frame ):

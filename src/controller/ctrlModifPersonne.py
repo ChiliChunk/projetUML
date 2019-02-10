@@ -1,6 +1,7 @@
 import re
 from src.IHM.DialBien import DialBien
 from src.IHM.DialAchatBien import  DialAchatBien
+from src.IHM.PriseRdv import PriseRdv
 regXchoice = "[123]"
 
 class ctrlModifPersonne:
@@ -15,6 +16,6 @@ class ctrlModifPersonne:
         if choice == "1":
             DialBien(self.agence,self.personne)
         elif choice == "2":
-            DialAchatBien(self.agence,self.personne)
+            DialAchatBien(personne=self.personne,agence=self.agence)
         elif choice == "3":
-            ...#Rdv
+            PriseRdv(self.agence,self.personne)

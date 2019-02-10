@@ -1,7 +1,7 @@
 from src.Model.Physique import Physique  # pour le main de test
 from src.Model.Agence import Agence  # pour le main de test
 from src.Model.Maison import Maison  # pour le main de test
-
+import src.IHM.Menu as men
 from src.controller.CtrlDialBien import CtrlDialBien
 
 
@@ -21,7 +21,7 @@ class DialBien:
 
         self.type = int(type)
         self.askStaticData()
-        self.askDynamicData(type)
+        self.askDynamicData()
 
     def askStaticData(self):
         valid = False
@@ -30,7 +30,7 @@ class DialBien:
         date = None
         test_orientation = None
         while not valid:
-            prix = input('Veuillez entrer un prix max souhaité en €: ')
+            prix = input('Veuillez entrer le prix souhaité en €: ')
             valid = self.ctrl.validateNumber(prix)
         self.prix = int(prix)
         valid = False
@@ -40,30 +40,38 @@ class DialBien:
         self.localisation = localisation
         valid = False
         while not valid:
-            date = input("Date de disponibilité (DD/MM/AAAA: ")
+            date = input("Date de disponibilité (DD/MM/AAAA) :")
             valid = self.ctrl.validateDate(date)
         self.dateDispo = date
         valid = False
         while not valid:
-            test_orientation = input("Oriantation (N,S,E,O) : ")
+            test_orientation = input("Orientation (N,S,E,O) : ")
             valid = self.ctrl.validateOrientation(test_orientation)
         self.orientation = test_orientation
 
     def submit(self):
-        biens = self.ctrl.attachToPers(self.type, self.prix, None, self.localisation, self.orientation, self.dateDispo,
+        biens = self.ctrl.attachToPers(self.type, self.prix, self.localisation, self.orientation, self.dateDispo,
                                        self.surface, self.nombrePiece, self.nb_etage, self.moyen_de_chauffage,
                                        self.longueur_facade, self.num_etage, self.charge_mensuelles)
         if len(biens) > 0:
-            lesBiens = "Les biens qui correspondent a votre voeux: \n"
+            lesBiens = "Les voeux qui correspondent a votre biens: \n"
             for bien in biens:
                 lesBiens += bien.__str__()
             print(lesBiens)
         else:
-            print("Aucun bien enregistrés non correspond a votre voeux")
+            print("Aucun voeux actuels ne correspond a votre bien")
+        men.Menu(self.ctrl.agence)
 
-    def askDynamicData(self, type):
+
+    def askDynamicData(self):
         self.nombrePiece = None
         self.surface = None
+        self.nb_etage =None
+        self.moyen_de_chauffage = None
+        self.longueur_facade = None
+        self.surface =None
+        self.num_etage =None
+        self.charge_mensuelles = None
         test_longueur_facade = None
         test_nb_etage = None
         test_charge_mensuelles = None
