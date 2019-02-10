@@ -1,5 +1,5 @@
 import re
-import src.Personne as prs
+import src.Model.Personne as prs
 import src.IHM.Menu as men
 regXmail ="[^@]+@[^@]+\.[^@]+"
 regXTel ="[0-9]{10,15}"

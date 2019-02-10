@@ -1,5 +1,5 @@
-from src.Rdv import Rdv,TypesRdv
-from src.BienImmobilier import BienImmobilier
+from src.Model.Rdv import Rdv,TypesRdv
+from src.Model.BienImmobilier import BienImmobilier
 class Agence:
     def __init__(self , nom="Agence Par defaut"):
         self.rdvs = []

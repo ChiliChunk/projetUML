@@ -1,6 +1,3 @@
-import src.Personne as prs
-import re
-import src.IHM.Menu as men
 import src.controller.ctrlAjoutPersonne as ctrl
 
 

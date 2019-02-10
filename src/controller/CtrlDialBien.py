@@ -1,6 +1,5 @@
-from src import Appartement, Maison, Terrain
-from src.Voeux import Voeux
-from src.BienImmobilier import BienImmobilier
+from src.Model import Appartement, Maison, Terrain
+
 
 class CtrlDialBien:
 

@@ -1,5 +1,5 @@
 import signal, os
-import src.Agence as ag
+import src.Model.Agence as ag
 import yaml
 import src.IHM.Menu as men
 

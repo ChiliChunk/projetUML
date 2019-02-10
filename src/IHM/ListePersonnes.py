@@ -1,6 +1,3 @@
-import src.Agence as ag
-import re
-import src.IHM.Menu as men
 import src.controller.ctrlListePersonnes as ctrl
 class ListePersonnes:
 

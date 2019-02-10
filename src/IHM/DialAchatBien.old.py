@@ -1,7 +1,7 @@
 from tkinter import *
-from src.Physique import Physique
-from src.Voeux import Voeux
-from src.BienImmobilier import BienImmobilier
+from src.Model.Physique import Physique
+from src.Model.Voeux import Voeux
+from src.Model.BienImmobilier import BienImmobilier
 import re
 
 class DialAchatBien:

@@ -1,4 +1,4 @@
-from src.BienImmobilier import BienImmobilier
+from src.Model.BienImmobilier import BienImmobilier
 
 
 class Terrain(BienImmobilier):

@@ -1,4 +1,5 @@
-from src import Personne
+from src.Model import Personne
+
 
 class Morale(Personne):
 

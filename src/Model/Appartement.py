@@ -1,4 +1,4 @@
-from src.BienImmobilier import BienImmobilier
+from src.Model.BienImmobilier import BienImmobilier
 
 class Appartement(BienImmobilier):
     def __init__(self,prix,dateVente,adresse,orientation,dateDispo,vendeur, nbPiece,numEtage, chargesMensuelles):

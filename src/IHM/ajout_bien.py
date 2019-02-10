@@ -1,6 +1,6 @@
 from tkinter import *
-from src.Physique import Physique
-from src.BienImmobilier import BienImmobilier
+from src.Model.Physique import Physique
+from src.Model.BienImmobilier import BienImmobilier
 import re
 
 class ajout_bien:

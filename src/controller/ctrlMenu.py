@@ -1,7 +1,7 @@
 import re
 import src.IHM.AjoutPersonne as ajt
 import src.IHM.ListePersonnes as lst
-import src.IHM.init as main
+import src.init as main
 regXchoice = "[123]"
 
 

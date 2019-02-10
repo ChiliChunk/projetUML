@@ -1,8 +1,8 @@
-from src.Physique import Physique  # pour le main de test
-from src.Agence import Agence  # pour le main de test
-from src.Maison import Maison  # pour le main de test
+from src.Model.Physique import Physique  # pour le main de test
+from src.Model.Agence import Agence  # pour le main de test
+from src.Model.Maison import Maison  # pour le main de test
 
-from src.IHM.Controller.CtrlDialBien import CtrlDialBien
+from src.controller.CtrlDialBien import CtrlDialBien
 
 
 class DialBien:

@@ -1,4 +1,4 @@
-from src.Personne import Personne
+from src.Model.Personne import Personne
 
 class Physique(Personne):
 
